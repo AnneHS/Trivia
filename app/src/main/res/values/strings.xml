@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Trivia</string>
+    <string name="amount_prompt">Choose amount</string>
+    <string name="difficulty_prompt">Choose difficulty</string>
+
+    <string-array name="amount_arrays">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+
+    <string-array name="difficulty_arrays">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
 </resources>
