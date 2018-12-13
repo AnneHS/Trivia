@@ -2,8 +2,10 @@ package com.example.anneh.trivia;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +22,10 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class QuestionsActivity extends AppCompatActivity implements QuestionsRequest.Callback {
+    Button ansOne;
+    Button ansTwo;
+    Button ansThree;
+    Button ansFour;
     int questNum = 0;
     int score = 0;
     String amount;
@@ -27,23 +33,18 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
     QuestionItem currentQuestion;
     ArrayList <String> allAnswers;
     ArrayList <QuestionItem> items;
-    String answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        // Toast test
-        Toast.makeText(this, "Started", Toast.LENGTH_SHORT).show();
-
         // get difficulty & amount
         Intent intent = getIntent();
         amount = intent.getStringExtra("amount");
         difficulty = intent.getStringExtra("difficulty");
 
-
-        //
+        // Request for questions from API
         QuestionsRequest request = new QuestionsRequest(getApplicationContext());
         request.getQuestions(QuestionsActivity.this, amount, difficulty);
 
@@ -52,6 +53,7 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
     @Override
     public void gotQuestions(ArrayList<QuestionItem> questionItems) {
 
+        // Update questions if request successful
         items = questionItems;
         updateQuestion();
     }
@@ -67,33 +69,31 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
         String question = currentQuestion.getQuestion();
 
         // set text
-
         String scoreString = "Score: " + Integer.toString(score);
         scoreTV.setText(scoreString);
-        questionTV.setText(question);
-
+        questionTV.setText(Html.fromHtml(question));
 
         // Find views for multiple choice buttons
-        Button ansOne = findViewById(R.id.A);
-        Button ansTwo = findViewById(R.id.B);
-        Button ansThree = findViewById(R.id.C);
-        Button ansFour = findViewById(R.id.D);
+        ansOne = findViewById(R.id.A);
+        ansTwo = findViewById(R.id.B);
+        ansThree = findViewById(R.id.C);
+        ansFour = findViewById(R.id.D);
 
-        // set Backgroundcolour back to white
-//        ansOne.setBackgroundColor(Color.WHITE);
-//        ansTwo.setBackgroundColor(Color.WHITE);
-//        ansThree.setBackgroundColor(Color.WHITE);
-//        ansFour.setBackgroundColor(Color.WHITE);
+        // Restore background colour for buttons
+        ansOne.setBackground(this.getResources().getDrawable(R.drawable.buttonshape1));
+        ansTwo.setBackground(this.getResources().getDrawable(R.drawable.buttonshape1));
+        ansThree.setBackground(this.getResources().getDrawable(R.drawable.buttonshape1));
+        ansFour.setBackground(this.getResources().getDrawable(R.drawable.buttonshape1));
 
         // get all answers for current question and shuffle
         allAnswers = currentQuestion.getAllAnswers();
         Collections.shuffle(allAnswers);
 
         // Set button text for multiple choice answers
-        ansOne.setText(allAnswers.get(0));
-        ansTwo.setText(allAnswers.get(1));
-        ansThree.setText(allAnswers.get(2));
-        ansFour.setText(allAnswers.get(3));
+        ansOne.setText(Html.fromHtml(allAnswers.get(0)));
+        ansTwo.setText(Html.fromHtml(allAnswers.get(1)));
+        ansThree.setText(Html.fromHtml(allAnswers.get(2)));
+        ansFour.setText(Html.fromHtml(allAnswers.get(3)));
 
         // update questNum
         questNum += 1;
@@ -120,27 +120,42 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
                                 break;
         }
 
-        // Colour button green/red if answer right/wrong and update score
-        if (chosenAnswer == currentQuestion.getAnswer()) {
-            // clickedBtn.setBackgroundColor(Color.GREEN);
-            Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+        // Colour right answer green
+        if (ansOne.getText().toString().equals(currentQuestion.getAnswer())) {
+            ansOne.setBackground(this.getResources().getDrawable(R.drawable.right_button));
+        }
+        else if (ansTwo.getText().toString().equals(currentQuestion.getAnswer())) {
+            ansTwo.setBackground(this.getResources().getDrawable(R.drawable.right_button));
+        }
+        else if (ansThree.getText().toString().equals(currentQuestion.getAnswer())) {
+            ansThree.setBackground(this.getResources().getDrawable(R.drawable.right_button));
+        }
+        else if (ansFour.getText().toString().equals(currentQuestion.getAnswer())) {
+            ansFour.setBackground(this.getResources().getDrawable(R.drawable.right_button));
+        }
+
+        // Updates score if answer is correct, else colors answer red
+        if (currentQuestion.getAnswer().equals(chosenAnswer)) {
             score = score + 10;
-            Log.d("Score", String.format("score = %d", score));
         }
         else {
-            // clickedBtn.setBackgroundColor(Color.RED);
-            Toast.makeText(this, "Incorrect!", Toast.LENGTH_SHORT).show();
+            clickedBtn.setBackground(this.getResources().getDrawable(R.drawable.wrong_button));
         }
 
-        // TODO: sleep: delay next question
+        // Delays next next step in order to show wrong and right answer
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (questNum == items.size()) {
+                    gameFinished();
+                }
+                else {
+                    updateQuestion();
+                }
+            }
+        }, 2000);
 
-        // Go to next question if available, else game is finished
-        if (questNum == items.size()) {
-            gameFinished();
-        }
-        else {
-            updateQuestion();
-        }
     }
 
     public void gameFinished () {
@@ -154,6 +169,6 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
 
     @Override
     public void gotQuestionsError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Could not get questions", Toast.LENGTH_SHORT).show();
     }
 }

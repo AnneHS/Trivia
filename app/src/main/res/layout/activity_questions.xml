@@ -12,45 +12,115 @@
         android:id="@+id/currentScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:color="#6666FF"
+        android:fontFamily="@font/andika"
         android:text="TextView"
         android:textAlignment="viewEnd"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorLink="@color/colorPrimaryDark"
         android:textSize="20dp" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:layout_weight="1"
+        android:backgroundTint="@android:color/holo_blue_bright"
+        android:fontFamily="@font/andika"
+        android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="35dp" />
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/A"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/buttonshape1"
+        android:elegantTextHeight="false"
+        android:fontFamily="@font/andika"
         android:onClick="answerClicked"
-        android:text="Button" />
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Button"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
 
     <Button
         android:id="@+id/B"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/buttonshape1"
+        android:elegantTextHeight="false"
+        android:fontFamily="@font/andika"
         android:onClick="answerClicked"
-        android:text="Button" />
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Button"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/C"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/buttonshape1"
+        android:elegantTextHeight="false"
+        android:fontFamily="@font/andika"
         android:onClick="answerClicked"
-        android:text="Button" />
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Button"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/D"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/buttonshape1"
+        android:elegantTextHeight="false"
+        android:fontFamily="@font/andika"
         android:onClick="answerClicked"
-        android:text="Button" />
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Button"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 </LinearLayout>
