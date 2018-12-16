@@ -8,4 +8,10 @@
 A quiz game that presents trivia questions. The player gets to choose the amount of questions and the difficulty level.
 At the end of the quiz the player can submit his or her score to the leaderboard.
 
-<img src="https://github.com/AnneHS/Trivia/blob/master/doc/startMenu.PNG" height="15%" width="24%"/> <img src="https://github.com/AnneHS/Trivia/blob/master/doc/question.PNG" height="15%" width="24%"/> <img src="https://github.com/AnneHS/Trivia/blob/master/doc/submitScore.PNG" height="15%" width="24%"/> <img src="https://github.com/AnneHS/Trivia/blob/master/doc/leaderboard.PNG" height="15%" width="24%"/>
+
+<p align="center">
+  <img src="https://github.com/AnneHS/Trivia/blob/master/app/doc/start.png" height="5%" width="25%"/> <img
+  src="https://github.com/AnneHS/Trivia/blob/master/app/doc/question_portret.png" height="5%" width="25%"/> <img 
+  src="https://github.com/AnneHS/Trivia/blob/master/app/doc/score_portret.png" height="5%" width="51%"/> <img 
+  src="https://github.com/AnneHS/Trivia/blob/master/app/doc/leaderboard.png" height="5" width="25%"/> 
+</p>
