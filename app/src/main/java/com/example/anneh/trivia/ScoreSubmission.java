@@ -50,12 +50,13 @@ public class ScoreSubmission implements Response.Listener<String>, Response.Erro
         RequestQueue queue = Volley.newRequestQueue(instance);
         String serverURL = "https://ide50-annehs.cs50.io:8080/list";
 
+        // Create hashmap for username and score
         Map<String, String> params = new HashMap<>();
-        params.put("username", username); // private username = ?
+        params.put("username", username);
         params.put("score", score);
 
+        // Add hashmap to request
         PostRequest request = new PostRequest(params, Request.Method.POST, serverURL, this, this);
-        // request.getParams();
         queue.add(request);
     }
 
