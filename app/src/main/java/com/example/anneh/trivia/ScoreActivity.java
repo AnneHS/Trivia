@@ -38,15 +38,15 @@ public class ScoreActivity extends AppCompatActivity implements ScoreSubmission.
     // Submit when submit button clicked and username entered
     public void submitClicked(View view) {
 
-        // MAG DIT MET TRY/CATCH?
+        // Get username
         EditText usernameTV = findViewById(R.id.username);
         String username = usernameTV.getText().toString();
 
+        // Make sure username is given
         if (username.length() == 0) {
             Toast.makeText(this, "Enter username", Toast.LENGTH_LONG).show();
         }
         else {
-            // Save score on server : KAN DIT HIER? --> gotSubmitted/gotSubmittedError?
             ScoreSubmission request = new ScoreSubmission(getApplicationContext());
             request.getSubmitted(ScoreActivity.this, username, score);
             Toast.makeText(this, "submit request", Toast.LENGTH_SHORT).show();
@@ -54,9 +54,9 @@ public class ScoreActivity extends AppCompatActivity implements ScoreSubmission.
 
     }
 
+    //  Go to leaderboard if submit was successful, else display Toast
     @Override
     public void gotSubmitted() {
-        Toast.makeText(this, "gotSubmitted", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(ScoreActivity.this, LeaderboardActivity.class);
         startActivity(intent);
     }

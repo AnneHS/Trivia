@@ -34,14 +34,11 @@ public class ScoreSubmission implements Response.Listener<String>, Response.Erro
         this.instance = context;
     }
 
-
-
-
     // Attempt to retrieve questions from the API + notify QuestionsActivity when done
     public void getSubmitted(Callback activity, String username, String score) {
         Log.d("ScoreSubmission.java", "getSubmitted");
 
-        // save activity as instance variable
+        // Save activity as instance variable
         callbackActivity = activity;
         username = username;
         score = score;
@@ -62,12 +59,11 @@ public class ScoreSubmission implements Response.Listener<String>, Response.Erro
         queue.add(request);
     }
 
-
+    // Pass questionItem's back to QuestionActivity
     @Override
     public void onResponse(String response) {
         Log.d("ScoreSubmission.java", "onResponse");
 
-        // Pass questionItem's back to QuestionActivity
         try {
             callbackActivity.gotSubmitted();
         }
@@ -82,6 +78,4 @@ public class ScoreSubmission implements Response.Listener<String>, Response.Erro
         Log.d("ScoreSubmission.java", "onErrorResponse");
         callbackActivity.gotSubmittedError(error.getMessage());
     }
-
-
 }

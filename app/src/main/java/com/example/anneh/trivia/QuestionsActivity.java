@@ -60,7 +60,7 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
 
     public void updateQuestion() {
 
-        // get next Question
+        // Get next Question
         currentQuestion = items.get(questNum);
 
         // Set question in TextView
@@ -68,7 +68,7 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
         TextView questionTV = (TextView) findViewById(R.id.question);
         String question = currentQuestion.getQuestion();
 
-        // set text
+        // Set text
         String scoreString = "Score: " + Integer.toString(score);
         scoreTV.setText(scoreString);
         questionTV.setText(Html.fromHtml(question));
@@ -85,7 +85,7 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
         ansThree.setBackground(this.getResources().getDrawable(R.drawable.buttonshape1));
         ansFour.setBackground(this.getResources().getDrawable(R.drawable.buttonshape1));
 
-        // get all answers for current question and shuffle
+        // Get all answers for current question and shuffle
         allAnswers = currentQuestion.getAllAnswers();
         Collections.shuffle(allAnswers);
 
@@ -95,7 +95,7 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
         ansThree.setText(Html.fromHtml(allAnswers.get(2)));
         ansFour.setText(Html.fromHtml(allAnswers.get(3)));
 
-        // update questNum
+        // Update question count
         questNum += 1;
     }
 
@@ -142,7 +142,7 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
             clickedBtn.setBackground(this.getResources().getDrawable(R.drawable.wrong_button));
         }
 
-        // Delays next next step in order to show wrong and right answer
+        // Delays next step in order to show wrong and right answer
         Handler h = new Handler();
         h.postDelayed(new Runnable() {
             @Override
@@ -154,13 +154,13 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
                     updateQuestion();
                 }
             }
-        }, 2000);
+        }, 1500);
 
     }
 
     public void gameFinished () {
 
-        // start ScoreActivity
+        // Start ScoreActivity and pass score
         Intent intent = new Intent(QuestionsActivity.this, ScoreActivity.class);
         intent.putExtra("score", score);
         startActivity(intent);
@@ -169,6 +169,8 @@ public class QuestionsActivity extends AppCompatActivity implements QuestionsReq
 
     @Override
     public void gotQuestionsError(String message) {
+
+        // Display Toast if QuestionRequest did not return questions
         Toast.makeText(this, "Could not get questions", Toast.LENGTH_SHORT).show();
     }
 }
